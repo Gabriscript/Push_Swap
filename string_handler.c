@@ -15,35 +15,41 @@
 static int process_number(int num, int *array, int *valid_count)
  {
     if (num == INT_MIN)
-        return 0; 
+        return (0); 
     if (!seen(num))
     {
         array[*valid_count] = num;
         (*valid_count)++;
     }
-    return 1; 
+    return (1); 
 }
 
 int     *string_to_array(const char *str, int *length)
 {
-    int *arrayay;
+    int *array;
     int num;
-    int valid_count= 0;
+    int valid_count;
 
+    valid_count = 0;
     *length = count_elements(str);
-    arrayay = malloc(*length * sizeof(int));
-    if (!arrayay)
-     return NULL;
-
+    if (*length == -1)
+    {
+        write(1,"Error : invalid input\n",23);
+        return (NULL);
+    }
+    array = malloc(*length * sizeof(int));
+    if (!array)
+     return (NULL);
     while (*str) {
         num = extract_number(&str);
-       if (!process_number(num, arrayay, &valid_count)) {
-            free(arrayay);
-            return NULL;
+       if (!process_number(num, array, &valid_count))
+        {
+            free(array);
+            return (NULL);
         }
     }
     *length = valid_count;
-    return (arrayay);
+    return (array);
 }
 
 
@@ -55,8 +61,11 @@ int     extract_number(const char **str)
         return (INT_MIN);    
     while (**str && has_spaces(**str))
         (*str)++;
-    if (**str == '\0') 
-        return (INT_MIN);
+    if ((**str == '\0') || (!is_digit(**str) && **str != '-' && **str != '+'))
+    {
+            write(1,"Error : invalid input\n",23);
+            return (INT_MIN);
+    }      
     number = ft_strtol((char **)str);
     if (!is_valid_int(number))
         return (INT_MIN);
@@ -73,7 +82,7 @@ int     *args_to_array(int ac, const char **av, int *length)
     
     valid_count = 0;    
     *length = ac - 1;
-    *array = malloc(sizeof(int) * *length);
+    array = malloc(sizeof(int) * *length);
     if (!array) 
         return (NULL);    
     i = 0;
@@ -83,7 +92,7 @@ int     *args_to_array(int ac, const char **av, int *length)
         if (!process_number(num, array, &valid_count))
         {
             free(array);
-            return NULL;
+            return (NULL);
         }
         i++;
     }

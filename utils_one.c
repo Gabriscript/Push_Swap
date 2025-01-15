@@ -25,11 +25,15 @@ int     count_elements(const char *str)
             i++;
         if (!str[i])
             break;
-        if (str[i] == '+' || str[i] == '-')
+         if ((str[i] == '+' || str[i] == '-') && is_digit(str[i + 1]))
             i++;
+        else if (!is_digit(str[i]))
+            return (-1);
         while (is_digit(str[i]))
             i++;
         count++;
+        if (!has_spaces(str[i]) && str[i] != '\0')
+            return (-1);
     }
     return (count);
 }

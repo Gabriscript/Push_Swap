@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = main.c utils_one.c utils_two.c sort.c string_handler.c \
-	commands.c commands_both.c checker_functions.c
+	   commands.c commands_both.c checker_functions.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
