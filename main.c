@@ -12,36 +12,44 @@
 
 #include "push_swap.h"
 
-void    sort(int *arr_a, int length)
+void    sort(int *av, int length)
 {
     if(length == 2)
-        sort_two_elements(arr_a,length);
+        sort_two_elements(av,length); 
+        
     else if(length == 3)
-        sort_three_elements(arr_a, length);
+        sort_three_elements(av, length);
     else
-        sort_all(arr_a,length);        
-        // free(arr_a);
+        sort_all(av,length);        
+        
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {   
-	int     *arr_a;
-	int     length;
+    int *arr;
+    int length;
 
-	if(ac < 2)
-		return (1);
-	else if(ac == 2)
-	{
-		arr_a = string_to_array(av[1],&length);
-		if (!arr_a)
-			return (1);
-	}
-	else
-	{
-		arr_a = args_to_array(ac,(const char **) av, &length);
-		if (!arr_a)
-			return (1);
-	}
-	if(!is_sorted(arr_a,length))
-		sort(arr_a,length);        
+    if (ac < 2)
+        return 1;    
+    if (ac == 2)
+    {
+        arr = string_to_array(av[1], &length);
+        if (!arr)
+            return 1;
+    }
+    else
+    {
+        arr = args_to_array(ac , (const char **)av , &length);
+        if (!arr)
+            return (1);
+    }
+    if (!is_sorted(arr, length))
+        sort(arr, length);
+  //  for (int i = 0; i < length; i++)
+    //{
+      //  printf("%d ",arr[i]);
+   // }
+    
+    free(arr);
+    return (0);
 }

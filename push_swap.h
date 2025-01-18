@@ -3,6 +3,7 @@
 # include<stdlib.h>
 # include<limits.h>
 #include<unistd.h>
+#include<stdio.h>
 
 #ifndef MAX_NUM
 # define MAX_NUM 500
@@ -20,7 +21,7 @@ void    reverse_rotate_both(int *arr_a,int size_a,int *arr_b,int size_b);
 void    rotate_both(int *arr_a,int size_a,int *arr_b,int size_b);
 void    swap_top_both(int *arr_a,int *arr_b);
 int     count_elements(const char *str);
-int     is_valid_int(long num);
+int     is_valid_int(long long num);
 int     has_only_number(char *str);
 int     is_digit(int num);
 long long   ft_strtol(char **str);

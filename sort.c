@@ -16,77 +16,89 @@ void    sort_three_elements(int *arr, int size)
 {
     int     max;
 
-    if (size != 3)
+    if (size != 3)		 
         return ;
+		
     max = find_max_pos(arr,size);
     if (max != 2)
     {
-        if(max == 0)
+        if(max == 0){
             rotate(arr,size);
-        else if(max == 1)
+			// write(1,"ra\n",4);
+		}
+        else if(max == 1){
             reverse_rotate(arr,size);
+			// write(1,"rra\n",5);
+		}
     }
-    if (arr[0] > arr[1])
-                swap_top(arr);
+   if (arr[0] > arr[1])
+   {
+          swap_top(arr);
+		// write(1,"sa\n",4);
+	}
+
 }
 
-static void reverse_sorting(int *arr_dest, int *size_dest, int *arr_src, int *size_src) {
-    while (*size_src > 0) {
-        bring_max_to_top(arr_src, *size_src);
-        push_top(arr_dest, size_dest, arr_src, size_src); // Push to B
-    }
-    while (*size_dest > 0) {
-        push_top(arr_src, size_src, arr_dest, size_dest); // Return to A
-    }
-    return; // Memory management responsibility remains with the caller
-}
-
-static int initial_checks(int *arr_a, int length)
+void divide_array(int *arr_a, int *arr_b, int *size_a, int *size_b, int pivot)
 {
-    if (is_sorted(arr_a, length) || length <= 1)
-        return 1;
-    if (is_reverse_sorted(arr_a, length))
-    {
-        reverse_sorting(arr_a, &length, NULL, 0);
-        return 1;
-    }
-    return 0;
-}
+    int original_size_a;
+	int i;
 
-static void divide_array(int *arr_a, int *arr_b, int *size_a, int *size_b, int pivot)
-{
-    int i = 0;
-    while (i < *size_a)
-    {
+	 i = 0;
+	 original_size_a = *size_a;
+    while (i < original_size_a)
+	{
         if (arr_a[0] <= pivot)
-            push_top(arr_b, size_b, arr_a, size_a);
-        else 
-            rotate(arr_a, *size_a);
-        i++;
+            {
+				push_top(arr_b, size_b, arr_a, size_a); // Push smaller or equal values to arr_b
+				//write(1,"pb\n",4);
+			}
+        else{
+            rotate(arr_a, *size_a); // Rotate larger values to the back of arr_a
+			// write(1,"ra\n",4);
+			 }
+		i++;
     }
 }
 
-void    sort_all(int *arr_a, int length) 
+static void	handle_reverse_sorted(int *arr_a, int *size_a)
 {
-    int size_a;
-    int size_b;
-    int *arr_b;
-    int pivot;
-    
-    size_a = length;
-    size_b = 0;    
-    if (initial_checks(arr_a, length))
-        return;
-    arr_b = malloc(length * sizeof(int));
-    if (!arr_b)
-         return;      
-    pivot = midpoint_finder(arr_a, length);
-    divide_array(arr_a, arr_b, &size_a, &size_b, pivot);
-    sort_all(arr_a, size_a);
-    while (size_b > 0)
-    {
-        bring_max_to_top(arr_b, size_b); 
-        push_top(arr_a, &size_a, arr_b, &size_b); 
-    }
-    free(arr_b); 
+	while (*size_a > 0)
+	{
+		bring_max_to_top(arr_a, *size_a);
+		rotate(arr_a, *size_a);
+		 //write(1,"ra\n",4);
+		(*size_a)--;
+	}
+}
+
+void	sort_all(int *arr_a, int length)
+{
+	int	size_a;
+	int	size_b;
+	int	*arr_b;
+	int	pivot;
+
+	size_a = length;
+	size_b = 0;
+	if (is_sorted(arr_a, length) || length <= 1)
+		return ;
+	if (is_reverse_sorted(arr_a, length))
+	{
+		handle_reverse_sorted(arr_a, &size_a);
+		return ;
+	}
+	arr_b = malloc(length * sizeof(int));
+	if (!arr_b)
+		return ;
+	pivot = midpoint_finder(arr_a, length);
+	divide_array(arr_a, arr_b, &size_a, &size_b, pivot);	
+	sort_all(arr_a, size_a);
+	while (size_b > 0)
+	{
+		bring_max_to_top(arr_b, size_b);
+		push_top(arr_a, &size_a, arr_b, &size_b);
+		// write(1,"pa\n",4);
+	}
+	free(arr_b);
 }

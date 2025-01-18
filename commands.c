@@ -21,7 +21,8 @@ void    swap_top(int *arr)
     temp = arr[0];
     arr[0] = arr[1];
     arr[1] = temp;
-    write(1,"pa\n",3);
+     write(1,"ra\n",4);
+    
 }
 
 void    push_top(int *arr_dest, int *size_dest, int *arr_src, int *size_src)
@@ -45,7 +46,8 @@ void    push_top(int *arr_dest, int *size_dest, int *arr_src, int *size_src)
         i++;
     }
     (*size_src)--;
-   write(1,"pa\n",3);
+     write(1,"ra\n",4);
+  
 }
 
 void    rotate(int *arr, int size)
@@ -63,7 +65,8 @@ void    rotate(int *arr, int size)
         i++;
     }
     arr[size - 1] = new_first;
-    write(1,"pa\n",3);;
+     write(1,"ra\n",4);
+    
 }
 
 void    reverse_rotate(int *arr, int size)
@@ -81,7 +84,8 @@ void    reverse_rotate(int *arr, int size)
         i--;
     }
     arr[0] = new_last;
-      write(1,"pa\n",3);
+     write(1,"ra\n",4);
+      
 }
 
 void    sort_two_elements(int *arr, int size)
@@ -89,5 +93,6 @@ void    sort_two_elements(int *arr, int size)
     if (size != 2)
         return ;
     swap_top(arr);
+  //  write(1,"sa\n",4);
 }
 

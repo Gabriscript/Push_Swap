@@ -38,12 +38,10 @@ int     count_elements(const char *str)
     return (count);
 }
 
-
-
 long long   ft_strtol(char **str)
 {
     long    i;
-    long    result;
+    long long   result;
     int     sign;
 
     if (!str || !*str)
@@ -79,6 +77,7 @@ void    bring_min_to_top(int *arr, int size)
         while (min_index > 0)
         {
             rotate(arr, size);
+             write(1,"ra\n",3);
             min_index--;
         }
     }else
@@ -86,18 +85,18 @@ void    bring_min_to_top(int *arr, int size)
          while (min_index < size)
         {
             reverse_rotate(arr, size);
+             write(1,"rra\n",4);
             min_index++;
         }
     }
 }
 
-int     seen(int num)
+int seen(int num)
 {
-    static int      seen[MAX_NUM];
-    static int      count;
-    int     i;
+    static int seen[MAX_NUM];
+    static int count = 0;
+    int i;
 
-    count = 0;
     i = 0;
     while (i < count)
     {
@@ -112,6 +111,7 @@ int     seen(int num)
     return (0);
 }
 
+
 void    bring_max_to_top(int *arr, int size)
 {
     int max_index;
@@ -121,7 +121,8 @@ void    bring_max_to_top(int *arr, int size)
     {
         while (max_index > 0)
         {
-            rotate(arr, size);         
+            rotate(arr, size);
+             write(1,"rb\n",4);         
             max_index--;
         }
     } 
@@ -129,7 +130,8 @@ void    bring_max_to_top(int *arr, int size)
     {
         while (max_index < size)
         {
-            reverse_rotate(arr, size);             
+            reverse_rotate(arr, size);   
+             write(1,"rrb\n",4);          
             max_index++;
         }
     }
