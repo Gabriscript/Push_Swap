@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_functions_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:08:24 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/20 12:08:24 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/22 15:22:52 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	seen(int num)
 	int			i;
 
 	i = 0;
-	count = 0;
 	while (i < count)
 	{
 		if (seen[i] == num)

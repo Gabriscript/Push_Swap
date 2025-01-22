@@ -3,35 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   string_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:01:50 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/15 05:01:50 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:49:27 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	process_number(int num, int *array, int *valid_count)
+static int process_number(int num, int *array, int *valid_count)
 {
-	if (num == INT_MIN)
-		return (0);
-	if (!seen(num))
-	{
-		array[*valid_count] = num;
-		(*valid_count)++;
-	}
-	return (1);
+   
+    if (num == INT_MIN)
+        return (0);
+    if (seen(num))
+    {
+        write(1, "Error : double spotted\n", 24);
+        return (0);
+    }
+    array[*valid_count] = num;
+    (*valid_count)++;
+    return (1);
 }
 
-static int	tiny_check(int num, int *array, int count)
+
+static int	tiny_check(int num, int *array, int *count)
 {
 	if (num == INT_MIN)
 	{
 		free(array);
 		return (0);
 	}
-	if (!process_number(num, array, &count))
+	if (!process_number(num, array, count))
 	{
 		free(array);
 		return (0);
@@ -58,10 +62,9 @@ int	*string_to_array(const char *str, int *length)
 	while (*str)
 	{
 		num = extract_number(&str);
-		if (!tiny_check(num, array, valid_count))
+		if (!tiny_check(num, array, &valid_count))
 			return (NULL);
 	}
-	array[valid_count++] = num;
 	*length = valid_count;
 	return (array);
 }

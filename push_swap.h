@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:03:28 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/20 10:03:28 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:07:37 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <limits.h>
-# include <unistd.h>
+# include <unistd.h> 
+#include<stdio.h>
 
 # ifndef MAX_NUM
 #  define MAX_NUM 500
@@ -36,6 +37,7 @@ int			is_valid_int(long long num);
 int			has_only_number(char *str);
 int			is_digit(int num);
 int			has_spaces(char c);
+int			seen(int num);
 int			*string_to_array(const char *str, int *length);
 int			*args_to_array(int ac, const char **av, int *length);
 int			extract_number(const char **str);

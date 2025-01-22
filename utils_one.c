@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:02:06 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/15 05:02:06 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:12:50 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ void	bring_min_to_top(int *arr, int size)
 		while (min_index > 0)
 		{
 			rotate(arr, size);
-			write(1, "ra\n", 4);
+			//printf("ra\n");
+			//write(1, "ra\n", 4);
 			min_index--;
 		}
 	}
@@ -86,7 +87,8 @@ void	bring_min_to_top(int *arr, int size)
 		while (min_index < size)
 		{
 			reverse_rotate(arr, size);
-			write(1, "rra\n", 5);
+			//printf("rra\n");
+			//write(1, "rra\n", 5);
 			min_index++;
 		}
 	}
@@ -102,7 +104,8 @@ void	bring_max_to_top(int *arr, int size)
 		while (max_index > 0)
 		{
 			rotate(arr, size);
-			write(1, "rb\n", 4);
+			//printf("rb\n");
+			//write(1, "rb\n", 4);
 			max_index--;
 		}
 	}
@@ -111,7 +114,8 @@ void	bring_max_to_top(int *arr, int size)
 		while (max_index < size)
 		{
 			reverse_rotate(arr, size);
-			write(1, "rrb\n", 5);
+			//printf("rrb\n");
+			//write(1, "rrb\n", 5);
 			max_index++;
 		}
 	}
