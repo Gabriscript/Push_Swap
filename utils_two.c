@@ -28,32 +28,6 @@ int	find_min_pos(int *arr, int size)
 	return (min_index);
 }
 
-static int	ft_abs(int num)
-{
-	if (num < 0)
-		num *= -1;
-	return (num);
-}
-
-int	midpoint_finder(int *arr, int size)
-{
-	int	midpoint;
-	int	closest;
-	int	i;
-
-	i = 1;
-	midpoint = (arr[find_max_pos(arr, size)]
-			+ arr[find_min_pos(arr, size)]) / 2;
-	closest = arr[0];
-	while (i < size)
-	{
-		if (ft_abs(arr[i] - midpoint) < ft_abs(closest - midpoint))
-			closest = arr[i];
-		i++;
-	}
-	return (closest);
-}
-
 int	find_max_pos(int *arr, int size)
 {
 	int	max_index;
@@ -72,7 +46,7 @@ int	find_max_pos(int *arr, int size)
 	return (max_index);
 }
 
-int	extract_number(const char **str)
+long long	extract_number(const char **str)
 {
 	long long	number;
 
@@ -84,7 +58,7 @@ int	extract_number(const char **str)
 		return (INT_MIN);
 	if (!is_digit(**str) && **str != '-' && **str != '+')
 	{
-		write(1, "Error: NAN\n", 12);
+		write(2, "Error\n", 6);
 		return (INT_MIN);
 	}
 	number = ft_strtol((char **)str);
@@ -92,5 +66,55 @@ int	extract_number(const char **str)
 		return (INT_MIN);
 	while (**str && has_spaces(**str))
 		(*str)++;
-	return ((int)number);
+	return (number);
+}
+
+void	bring_min_to_top(int *arr, int size)
+{
+	int	min_index;
+
+	min_index = find_min_pos(arr, size);
+	if (min_index < size / 2)
+	{
+		while (min_index > 0)
+		{
+			rotate(arr, size);
+			print_command("ra");
+			min_index--;
+		}
+	}
+	else
+	{
+		while (min_index < size)
+		{
+			reverse_rotate(arr, size);
+			print_command("rra");
+			min_index++;
+		}
+	}
+}
+
+void	bring_max_to_top(int *arr, int size)
+{
+	int	max_index;
+
+	max_index = find_max_pos(arr, size);
+	if (max_index < size / 2)
+	{
+		while (max_index > 0)
+		{
+			rotate(arr, size);
+			print_command("rb");
+			max_index--;
+		}
+	}
+	else
+	{
+		while (max_index < size)
+		{
+			reverse_rotate(arr, size);
+			print_command("rrb");
+			max_index++;
+		}
+	}
 }

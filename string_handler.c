@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   string_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:01:50 by ggargani          #+#    #+#             */
 /*   Updated: 2025/01/22 16:49:27 by ggargani         ###   ########.fr       */
@@ -12,31 +12,28 @@
 
 #include "push_swap.h"
 
-static int process_number(int num, int *array, int *valid_count)
+static int	process_number(int num, int *array, int *valid_count)
 {
-   
-    if (num == INT_MIN)
-        return (0);
-    if (seen(num))
-    {
-        write(1, "Error : double spotted\n", 24);
-        return (0);
-    }
-    array[*valid_count] = num;
-    (*valid_count)++;
-    return (1);
+	if (num == INT_MIN)
+		return (0);
+	if (seen(num))
+		return (0);
+	array[*valid_count] = num;
+	(*valid_count)++;
+	return (1);
 }
 
-
-static int	tiny_check(int num, int *array, int *count)
+static int	tiny_check(long long num, int *array, int *count)
 {
 	if (num == INT_MIN)
 	{
 		free(array);
+		write(2, "Error\n", 6);
 		return (0);
 	}
 	if (!process_number(num, array, count))
 	{
+		write(2, "Error\n", 6);
 		free(array);
 		return (0);
 	}
@@ -45,15 +42,15 @@ static int	tiny_check(int num, int *array, int *count)
 
 int	*string_to_array(const char *str, int *length)
 {
-	int	*array;
-	int	num;
-	int	valid_count;
+	long long	num;
+	int			valid_count;
+	int			*array;
 
 	*length = count_elements(str);
 	valid_count = 0;
 	if (*length == -1)
 	{
-		write(1, "Error: NAN\n", 12);
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	array = malloc(*length * sizeof(int));

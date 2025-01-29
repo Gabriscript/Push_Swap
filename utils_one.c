@@ -24,7 +24,7 @@ int	count_elements(const char *str)
 		while (has_spaces(str[i]))
 			i++;
 		if (!str[i])
-			break ;
+			return (-1);
 		if ((str[i] == '+' || str[i] == '-') && is_digit(str[i + 1]))
 			i++;
 		else if (!is_digit(str[i]))
@@ -67,63 +67,21 @@ long long	ft_strtol(char **str)
 	return (result);
 }
 
-void	bring_min_to_top(int *arr, int size)
+static int	ft_strlen(char *str)
 {
-	int	min_index;
+	int	i;
 
-	min_index = find_min_pos(arr, size);
-	if (min_index < size / 2)
+	i = 0;
+	while (*str)
 	{
-		while (min_index > 0)
-		{
-			rotate(arr, size);
-			//printf("ra\n");
-			//write(1, "ra\n", 4);
-			min_index--;
-		}
+		str++;
+		i++;
 	}
-	else
-	{
-		while (min_index < size)
-		{
-			reverse_rotate(arr, size);
-			//printf("rra\n");
-			//write(1, "rra\n", 5);
-			min_index++;
-		}
-	}
+	return (i);
 }
 
-void	bring_max_to_top(int *arr, int size)
+void	print_command(char *cmd)
 {
-	int	max_index;
-
-	max_index = find_max_pos(arr, size);
-	if (max_index < size / 2)
-	{
-		while (max_index > 0)
-		{
-			rotate(arr, size);
-			//printf("rb\n");
-			//write(1, "rb\n", 4);
-			max_index--;
-		}
-	}
-	else
-	{
-		while (max_index < size)
-		{
-			reverse_rotate(arr, size);
-			//printf("rrb\n");
-			//write(1, "rrb\n", 5);
-			max_index++;
-		}
-	}
-}
-
-void	sort_two_elements(int *arr, int size)
-{
-	if (size != 2)
-		return ;
-	swap_top(arr);
+	write(1, cmd, ft_strlen(cmd));
+	write(1, "\n", 1);
 }

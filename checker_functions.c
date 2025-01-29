@@ -16,8 +16,6 @@ int	is_valid_int(long long num)
 {
 	if (num >= INT_MIN && num <= INT_MAX)
 		return (1);
-	else
-		write(1, "Error : number too large\n", 26);
 	return (0);
 }
 

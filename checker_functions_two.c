@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   checker_functions_two.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ggargani <ggargani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:08:24 by ggargani          #+#    #+#             */
 /*   Updated: 2025/01/22 15:22:52 by ggargani         ###   ########.fr       */

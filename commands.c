@@ -21,8 +21,6 @@ void	swap_top(int *arr)
 	temp = arr[0];
 	arr[0] = arr[1];
 	arr[1] = temp;
-	//write(1, "sa\n", 4);
-	printf("ra\n");
 }
 
 void	push_top(int *arr_dst, int *size_dst, int *arr_src, int *size_src)
@@ -46,7 +44,6 @@ void	push_top(int *arr_dst, int *size_dst, int *arr_src, int *size_src)
 		i++;
 	}
 	(*size_src)--;
-	printf("ra\n");
 }
 
 void	rotate(int *arr, int size)
@@ -64,7 +61,6 @@ void	rotate(int *arr, int size)
 		i++;
 	}
 	arr[size - 1] = new_first;
-	printf("ra\n");
 }
 
 void	reverse_rotate(int *arr, int size)
@@ -82,5 +78,4 @@ void	reverse_rotate(int *arr, int size)
 		i--;
 	}
 	arr[0] = new_last;
-	printf("ra\n");
 }
