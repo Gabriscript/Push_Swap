@@ -6,7 +6,7 @@
 /*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:06:31 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/29 15:06:31 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/31 11:59:29 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 static int	is_in_chunk(int current, int *pivots, int chunk, int num_chunks)
 {
-	int	wich_chunk;
-
-	wich_chunk = current > pivots[chunk - 1] && current <= pivots[chunk];
-	if (chunk == 0)
-		wich_chunk = current <= pivots[0];
-	if (chunk == num_chunks - 1)
-		wich_chunk = current > pivots[num_chunks - 2];
-	return (wich_chunk);
+	if (current <= pivots[0])
+		return (1);
+	else if (current > pivots[num_chunks - 2])
+		return (1);
+	else if (current > pivots[chunk - 1] && current <= pivots[chunk])
+		return (1);
+	return (0);
 }
 
 static void	process_element(t_stack_data *data, int in_chunk)

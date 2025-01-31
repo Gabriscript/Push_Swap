@@ -6,7 +6,7 @@
 /*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:02:35 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/29 12:00:00 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:32:35 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,34 @@ static void	sort_three_elements(int *arr)
 	}
 }
 
+static void	sort_five_elements(int *arr, int size)
+{
+	int	i;
+	int	size_b;
+	int	*arr_b;
+
+	i = 0;
+	size_b = 0;
+	arr_b = malloc(size * sizeof(int));
+	if (!arr_b)
+		return ;
+	while (i < 2)
+	{
+		bring_min_to_top(arr, size);
+		push_top(arr_b, &size_b, arr, &size);
+		print_command("pb");
+		i++;
+	}
+	sort_three_elements(arr);
+	while (i > 0)
+	{
+		push_top(arr, &size, arr_b, &size_b);
+		print_command("pa");
+		i--;
+	}
+	free(arr_b);
+}
+
 static void	sort_all(int *arr_a, int length)
 {
 	t_stack_data	data;
@@ -64,6 +92,8 @@ void	sort(int *array, int length)
 		sort_two_elements(array);
 	else if (length == 3)
 		sort_three_elements(array);
+	else if (length == 5 || length == 4)
+		sort_five_elements(array, length);
 	else
 		sort_all(array, length);
 }
