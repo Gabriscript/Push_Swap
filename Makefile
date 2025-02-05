@@ -13,7 +13,7 @@
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror  // -fsanitize=address -fsanitize=leak -fsanitize=undefined -ggdb3
 
 SRCS = main.c utils_one.c utils_two.c sort.c string_handler.c \
 	   commands.c commands_both.c checker_functions.c checker_functions_two.c \
