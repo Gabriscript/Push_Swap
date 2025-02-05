@@ -26,7 +26,7 @@
     else if (chunk > 0 && chunk < num_chunks - 1 && 
              current > pivots[chunk - 1] && current <= pivots[chunk])
         return 1;
-
+-fsanitize=address -fsanitize=leak -fsanitize=undefined -ggdb3
     return 0;
 }*/
 static int	is_in_chunk(int current, int *pivots, int chunk, int num_chunks)
@@ -46,11 +46,9 @@ static void	process_element(t_stack_data *data, int in_chunk)
 	{
 		push_top(data->arr_b, &data->size_b, data->arr_a, &data->size_a);
 		print_command("pb");
-		if (data->size_b > 1 && data->arr_b[0] < data->arr_b[1])
-		{
-			rotate(data->arr_b, data->size_b);
-			print_command("rb");
-		}
+		if (data->size_b > 1 && data->arr_b[0] < data->arr_b[1]
+			&& data->arr_b[1] < data->arr_b[0])
+			swap_top_both(data->arr_b, data->arr_b);
 	}
 	else
 	{
@@ -83,12 +81,14 @@ static void	init_arrays(t_stack_data *data, int **pivots, int **temp_arr)
 	i = 0;
 	num_chunks = get_num_chunks(data->size_a);
 	*pivots = malloc(sizeof(int) * (num_chunks - 1));
+	if (!(*pivots))
+		exit(1);
 	*temp_arr = malloc(sizeof(int) * data->size_a);
-	if (!(*pivots) || !(*temp_arr))
+	if (!(*temp_arr))
 	{
 		free(*pivots);
-		free(*temp_arr);
-		return ;
+		*pivots = NULL;
+		exit(1);
 	}
 	while (i < data->size_a)
 	{
