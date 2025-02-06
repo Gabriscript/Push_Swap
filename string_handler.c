@@ -74,6 +74,8 @@ static int	*append_sub_array(int *arr, int *sub_arr, int tot_len, int sub_len)
 	if (!new_array)
 	{
 		free(arr);
+		if (sub_arr)
+			free(sub_arr);
 		return (NULL);
 	}
 	if (arr)
@@ -82,6 +84,7 @@ static int	*append_sub_array(int *arr, int *sub_arr, int tot_len, int sub_len)
 		free(arr);
 	}
 	ft_memcpy(new_array + tot_len, sub_arr, sizeof(int) * sub_len);
+	free(sub_arr);
 	return (new_array);
 }
 

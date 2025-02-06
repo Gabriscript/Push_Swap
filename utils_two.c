@@ -12,6 +12,35 @@
 
 #include "push_swap.h"
 
+long long	ft_strtol(char **str)
+{
+	long long	result;
+	long		i;
+	int			sign;
+
+	if (!str || !*str)
+		return (0);
+	sign = 1;
+	result = 0;
+	i = 0;
+	if ((*str)[i] == '+' || (*str)[i] == '-')
+	{
+		if ((*str)[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (is_digit((*str)[i]))
+	{
+		result = result * 10 + ((*str)[i] - '0');
+		i++;
+	}
+	*str += i;
+	result *= sign;
+	if (!is_valid_int(result))
+		return (INT_MIN);
+	return (result);
+}
+
 int	find_min_pos(int *arr, int size)
 {
 	int	min_index;
@@ -44,29 +73,6 @@ int	find_max_pos(int *arr, int size)
 		i++;
 	}
 	return (max_index);
-}
-
-long long	extract_number(const char **str)
-{
-	long long	number;
-
-	if (!str || !*str)
-		return (INT_MIN);
-	while (**str && has_spaces(**str))
-		(*str)++;
-	if (**str == '\0')
-		return (INT_MIN);
-	if (!is_digit(**str) && **str != '-' && **str != '+')
-	{
-		write(2, "Error\n", 6);
-		return (INT_MIN);
-	}
-	number = ft_strtol((char **)str);
-	if (!is_valid_int(number))
-		return (INT_MIN);
-	while (**str && has_spaces(**str))
-		(*str)++;
-	return (number);
 }
 
 void	bring_min_to_top(int *arr, int size)

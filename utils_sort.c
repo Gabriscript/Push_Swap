@@ -11,26 +11,13 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*static int is_in_chunk(int current, int *pivots, int chunk, int num_chunks)
-{
-    if (num_chunks <= 0 || chunk < 0 || chunk >= num_chunks)
-        return 0;  // Gestione errore
-
-    if (num_chunks == 1)
-        return 1;  // Se c'è solo un chunk, tutto è in quel chunk
-
-    if (chunk == 0 && current <= pivots[0])
-        return 1;
-    else if (chunk == num_chunks - 1 && current > pivots[num_chunks - 2])
-        return 1;
-    else if (chunk > 0 && chunk < num_chunks - 1 && 
-             current > pivots[chunk - 1] && current <= pivots[chunk])
-        return 1;
+/*
 -fsanitize=address -fsanitize=leak -fsanitize=undefined -ggdb3
-    return 0;
 }*/
 static int	is_in_chunk(int current, int *pivots, int chunk, int num_chunks)
 {
+	if (num_chunks <= 0 || chunk < 0 || chunk >= num_chunks)
+		return (0);
 	if (current <= pivots[0])
 		return (1);
 	else if (current > pivots[num_chunks - 2])
@@ -64,7 +51,7 @@ static void	chunker(t_stack_data *data, int *pivots, int chunk, int num_chunks)
 	int	in_chunk;
 
 	original_size_a = data->size_a;
-	while (original_size_a > 0)
+	while (original_size_a >= 0)
 	{
 		current = data->arr_a[0];
 		in_chunk = is_in_chunk(current, pivots, chunk, num_chunks);

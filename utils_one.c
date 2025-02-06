@@ -38,35 +38,6 @@ int	count_elements(const char *str)
 	return (count);
 }
 
-long long	ft_strtol(char **str)
-{
-	long long	result;
-	long		i;
-	int			sign;
-
-	if (!str || !*str)
-		return (0);
-	sign = 1;
-	result = 0;
-	i = 0;
-	if ((*str)[i] == '+' || (*str)[i] == '-')
-	{
-		if ((*str)[i] == '-')
-			sign = -1;
-		i++;
-	}
-	while (is_digit((*str)[i]))
-	{
-		result = result * 10 + ((*str)[i] - '0');
-		i++;
-	}
-	*str += i;
-	result *= sign;
-	if (!is_valid_int(result))
-		return (INT_MIN);
-	return (result);
-}
-
 static int	ft_strlen(char *str)
 {
 	int	i;
@@ -84,4 +55,43 @@ void	print_command(char *cmd)
 {
 	write(1, cmd, ft_strlen(cmd));
 	write(1, "\n", 1);
+}
+
+static int	check_number_length(const char *str)
+{
+	int	digit_count;
+
+	digit_count = 0;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str && is_digit(*str))
+	{
+		digit_count++;
+		str++;
+	}
+	if (digit_count <= 11)
+		return (1);
+	return (0);
+}
+
+long long	extract_number(const char **str)
+{
+	long long	number;
+
+	if (!str || !*str)
+		return (INT_MIN);
+	while (**str && has_spaces(**str))
+		(*str)++;
+	if (**str == '\0')
+		return (INT_MIN);
+	if (!is_digit(**str) && **str != '-' && **str != '+')
+		return (INT_MIN);
+	if (!check_number_length(*str))
+		return (INT_MIN);
+	number = ft_strtol((char **)str);
+	if (!is_valid_int(number))
+		return (INT_MIN);
+	while (**str && has_spaces(**str))
+		(*str)++;
+	return (number);
 }
