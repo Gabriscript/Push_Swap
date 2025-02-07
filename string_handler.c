@@ -6,7 +6,7 @@
 /*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:01:50 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/22 16:49:27 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:25:06 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	tiny_check(long long num, int *array, int *count)
 {
 	if (num == INT_MIN)
 	{
-		free(array);
 		write(2, "Error\n", 6);
+		free(array);
 		return (0);
 	}
 	if (!process_number(num, array, count))
@@ -74,8 +74,6 @@ static int	*append_sub_array(int *arr, int *sub_arr, int tot_len, int sub_len)
 	if (!new_array)
 	{
 		free(arr);
-		if (sub_arr)
-			free(sub_arr);
 		return (NULL);
 	}
 	if (arr)
@@ -84,7 +82,6 @@ static int	*append_sub_array(int *arr, int *sub_arr, int tot_len, int sub_len)
 		free(arr);
 	}
 	ft_memcpy(new_array + tot_len, sub_arr, sizeof(int) * sub_len);
-	free(sub_arr);
 	return (new_array);
 }
 

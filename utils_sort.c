@@ -6,25 +6,22 @@
 /*   By: ggargani <ggargani@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 15:06:31 by ggargani          #+#    #+#             */
-/*   Updated: 2025/01/31 11:59:29 by ggargani         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:36:04 by ggargani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
--fsanitize=address -fsanitize=leak -fsanitize=undefined -ggdb3
-}*/
+
 static int	is_in_chunk(int current, int *pivots, int chunk, int num_chunks)
 {
-	if (num_chunks <= 0 || chunk < 0 || chunk >= num_chunks)
+	if (!pivots || num_chunks <= 1 || chunk < 0 || chunk >= num_chunks)
 		return (0);
-	if (current <= pivots[0])
-		return (1);
-	else if (current > pivots[num_chunks - 2])
-		return (1);
-	else if (current > pivots[chunk - 1] && current <= pivots[chunk])
-		return (1);
-	return (0);
+	if (chunk == 0)
+		return (current <= pivots[0]);
+	else if (chunk == num_chunks - 1)
+		return (current > pivots[num_chunks - 2]);
+	else
+		return (current > pivots[chunk - 1] && current <= pivots[chunk]);
 }
 
 static void	process_element(t_stack_data *data, int in_chunk)
@@ -68,15 +65,9 @@ static void	init_arrays(t_stack_data *data, int **pivots, int **temp_arr)
 	i = 0;
 	num_chunks = get_num_chunks(data->size_a);
 	*pivots = malloc(sizeof(int) * (num_chunks - 1));
-	if (!(*pivots))
-		exit(1);
 	*temp_arr = malloc(sizeof(int) * data->size_a);
-	if (!(*temp_arr))
-	{
-		free(*pivots);
-		*pivots = NULL;
-		exit(1);
-	}
+	if (!(*pivots) || !(*temp_arr))
+		return ;
 	while (i < data->size_a)
 	{
 		(*temp_arr)[i] = data->arr_a[i];
